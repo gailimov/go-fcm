@@ -77,6 +77,11 @@ type ApsDictionary struct {
 	// When this key is present, the system wakes up your app in the background and
 	// delivers the notification to its app delegate.
 	ContentAvailable int `json:"content-available,omitempty"`
+
+	// The notification service app extension flag. If the value is 1, the system passes
+	// the notification to your notification service app extension before delivery.
+	// Use your extension to modify the notification’s content.
+	MutableContent int `json:"mutable-content,omitempty"`
 }
 
 // ApnsAlert represents a APNS alert
