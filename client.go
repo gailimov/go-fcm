@@ -24,9 +24,9 @@ type Client struct {
 	tokenProvider *tokenProvider
 }
 
-// NewClient creates new Firebase Cloud Messaging Client based on a json service account file credentials file.
-func NewClient(projectID string, credentialsLocation string, opts ...Option) (*Client, error) {
-	tp, err := newTokenProvider(credentialsLocation)
+// NewClient creates new Firebase Cloud Messaging Client based on a service account JSON key file.
+func NewClient(projectID string, jsonKey []byte, opts ...Option) (*Client, error) {
+	tp, err := newTokenProvider(jsonKey)
 	if err != nil {
 		return nil, err
 	}

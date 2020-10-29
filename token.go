@@ -2,7 +2,6 @@ package fcm
 
 import (
 	"context"
-	"io/ioutil"
 
 	"github.com/pkg/errors"
 	"golang.org/x/oauth2"
@@ -15,12 +14,7 @@ type tokenProvider struct {
 	tokenSource oauth2.TokenSource
 }
 
-func newTokenProvider(credentialsLocation string) (*tokenProvider, error) {
-	jsonKey, err := ioutil.ReadFile(credentialsLocation)
-	if err != nil {
-		return nil, errors.Wrapf(err, "fcm: failed to read credentials file at: '%s'", credentialsLocation)
-	}
-
+func newTokenProvider(jsonKey []byte) (*tokenProvider, error) {
 	cfg, err := google.JWTConfigFromJSON(jsonKey, firebaseScope)
 	if err != nil {
 		return nil, errors.Wrapf(err, "fcm: failed to get JWT config for the firebase.messaging scope")
